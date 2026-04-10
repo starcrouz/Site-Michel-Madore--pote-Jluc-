@@ -7,7 +7,7 @@
     <meta name="description" content="Exposition Michel Madore - liber amicorum le livre des amitiés. AMI – atelier-musée de l'imprimerie.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,7 +46,7 @@
             <div class="info-block">
                 <h3 class="subtitle-small">Exposition</h3>
                 <p><strong>11 avril — 27 juillet 2026</strong></p>
-                <p>Dessins, peintures, écritures... sculptures</p>
+                <p class="fw-black">Dessins, peintures, écritures... sculptures</p>
             </div>
             
             <div class="info-block">
@@ -200,10 +200,40 @@
 
     <footer>
         <div class="container">
-            <p>contact — <a href="mailto:michelmadore99@gmail.com">michelmadore99@gmail.com</a></p>
+            <p class="fw-black">contact — <a href="mailto:michelmadore99@gmail.com">michelmadore99@gmail.com</a></p>
             <p>site en construction</p>
         </div>
     </footer>
 
+    <!-- Lightbox Structure -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        // Lightbox Interactivity
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = document.querySelectorAll('.gallery-item img');
+
+        images.forEach(img => {
+            img.style.cursor = 'pointer'; // indicates it's clickable
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                // Add a small delay for smooth fade-in
+                setTimeout(() => lightbox.style.opacity = '1', 10);
+            });
+        });
+
+        // Close when clicking outside image or on the X
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.opacity = '0';
+                setTimeout(() => lightbox.style.display = 'none', 300); // 300ms matches CSS transition
+            }
+        });
+    </script>
 </body>
 </html>
